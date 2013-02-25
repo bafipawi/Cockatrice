@@ -20,14 +20,14 @@ int CardDatabaseModel::rowCount(const QModelIndex &/*parent*/) const
 
 int CardDatabaseModel::columnCount(const QModelIndex &/*parent*/) const
 {
-	return 5;
+	return 6;
 }
 
 QVariant CardDatabaseModel::data(const QModelIndex &index, int role) const
 {
 	if (!index.isValid())
 		return QVariant();
-	if ((index.row() >= cardList.size()) || (index.column() >= 5))
+	if ((index.row() >= cardList.size()) || (index.column() >= 6))
 		return QVariant();
 	if (role != Qt::DisplayRole)
 		return QVariant();
@@ -43,8 +43,9 @@ QVariant CardDatabaseModel::data(const QModelIndex &index, int role) const
 			return setList.join(", ");
 		}
 		case 2: return card->getManaCost();
-		case 3: return card->getCardType();
-		case 4: return card->getPowTough();
+		case 3: return card->getColors();
+		case 4: return card->getCardType();
+		case 5: return card->getPowTough();
 		default: return QVariant();
 	}
 }
@@ -59,8 +60,9 @@ QVariant CardDatabaseModel::headerData(int section, Qt::Orientation orientation,
 		case 0: return QString(tr("Name"));
 		case 1: return QString(tr("Sets"));
 		case 2: return QString(tr("Mana cost"));
-		case 3: return QString(tr("Card type"));
-		case 4: return QString(tr("P/T"));
+		case 3: return QString(tr("Mana color"));
+		case 4: return QString(tr("Card type"));
+		case 5: return QString(tr("P/T"));
 		default: return QVariant();
 	}
 }
